@@ -1,2 +1,2 @@
 # LunaGame
- Made in Godot 4 using godot-voxel
+ Created and built with [godot_voxel](https://github.com/Zylann/godot_voxel)
