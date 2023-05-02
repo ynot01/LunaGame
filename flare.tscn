@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://vrcdqskyeovg"]
+
+[ext_resource type="Script" path="res://flare.gd" id="1_68e8p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tef5r"]
+size = Vector3(0.15, 0.4, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gj80"]
+albedo_color = Color(1, 0, 0.0156863, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcok0"]
+albedo_color = Color(0.470588, 0.196078, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qy4y"]
+albedo_color = Color(0.470588, 0.196078, 0, 1)
+
+[node name="Flare" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.2
+continuous_cd = true
+script = ExtResource("1_68e8p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_tef5r")
+
+[node name="Light" type="CSGBox3D" parent="."]
+size = Vector3(0.1, 0.225, 0.1)
+material = SubResource("StandardMaterial3D_8gj80")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+omni_range = 25.0
+omni_attenuation = 1.2
+
+[node name="TopCap" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+size = Vector3(0.15, 0.1, 0.15)
+material = SubResource("StandardMaterial3D_jcok0")
+
+[node name="BotCap" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+size = Vector3(0.15, 0.1, 0.15)
+material = SubResource("StandardMaterial3D_6qy4y")

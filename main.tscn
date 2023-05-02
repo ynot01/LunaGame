@@ -1,0 +1,487 @@
+[gd_scene load_steps=17 format=3 uid="uid://74qd3stjwjcl"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_juxlc"]
+[ext_resource type="Theme" uid="uid://deswxb7prgkhw" path="res://mainmenu_btn_theme.tres" id="2_g3vuc"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="4_j0klr"]
+[ext_resource type="AudioStream" uid="uid://c6npwme2anpu3" path="res://loopcrt.ogg" id="5_oa4cc"]
+
+[sub_resource type="Animation" id="Animation_1wos4"]
+resource_name = "MenuStart"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainMenuLayer/MainMenu/Title:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 271388),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainMenuLayer/MainMenu/Play:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.6, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainMenuLayer/MainMenu/Options:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.6, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MainMenuLayer/MainMenu/Exit:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.6, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MainMenuLayer/MainMenu/ControlInfo:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.1, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nxa2b"]
+resource_name = "MenuFade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainMenuLayer/MainMenu:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainMenuLayer/MainMenu/LoadingTxt:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yualg"]
+_data = {
+"MenuFade": SubResource("Animation_nxa2b"),
+"MenuStart": SubResource("Animation_1wos4")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_es8qm"]
+shader = ExtResource("4_j0klr")
+shader_parameter/res = Vector2(1152, 648)
+shader_parameter/mask_type = 0
+shader_parameter/bloom_type = 0
+shader_parameter/hardScan = -8.0
+shader_parameter/hardPix = -2.0
+shader_parameter/hardBloomScan = -2.0
+shader_parameter/hardBloomPix = -1.5
+shader_parameter/bloomAmount = 16.0
+shader_parameter/warp = Vector2(64, 24)
+shader_parameter/maskDark = 0.5
+shader_parameter/maskLight = 1.5
+
+[sub_resource type="Environment" id="Environment_dxkun"]
+background_mode = 1
+ambient_light_source = 1
+ssr_enabled = true
+ssao_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.03
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1g130"]
+
+[sub_resource type="VoxelGeneratorNoise" id="VoxelGeneratorNoise_5y6uy"]
+noise = SubResource("FastNoiseLite_1g130")
+height_range = 500.0
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_r8p45"]
+deep_sampling_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x5hvp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e62i1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_suort"]
+height = 500.0
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ne8d"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.631373)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_juxlc")
+metadata/_edit_lock_ = true
+
+[node name="MainMenuAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yualg")
+}
+
+[node name="MainMenuLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MainMenu" type="Control" parent="MainMenuLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlackBG" type="ColorRect" parent="MainMenuLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="MainMenuLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.3
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 128
+text = "Luna"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LoadingTxt" type="Label" parent="MainMenuLayer/MainMenu"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.467882
+anchor_top = 0.348765
+anchor_right = 0.532986
+anchor_bottom = 0.388889
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."
+metadata/_edit_use_anchors_ = true
+
+[node name="Play" type="Button" parent="MainMenuLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.4
+anchor_right = 0.8
+anchor_bottom = 0.6
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g3vuc")
+disabled = true
+text = "Play"
+metadata/_edit_use_anchors_ = true
+
+[node name="Options" type="Button" parent="MainMenuLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.65
+anchor_right = 0.8
+anchor_bottom = 0.85
+theme = ExtResource("2_g3vuc")
+disabled = true
+text = "Options"
+
+[node name="Exit" type="Button" parent="MainMenuLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.9
+anchor_right = 0.8
+anchor_bottom = 0.95
+theme = ExtResource("2_g3vuc")
+theme_override_font_sizes/font_size = 24
+disabled = true
+text = "Exit"
+
+[node name="ControlInfo" type="Label" parent="MainMenuLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.842014
+anchor_top = 0.278549
+anchor_right = 0.976562
+anchor_bottom = 0.721451
+grow_horizontal = 0
+grow_vertical = 2
+text = "WASD - Move
+Space - Jump
+Esc - Menu
+E - Pick up
+F - Flare"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CRT" type="ColorRect" parent="MainMenuLayer/MainMenu"]
+material = SubResource("ShaderMaterial_es8qm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Options" type="Control" parent="MainMenuLayer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="BlackBG" type="ColorRect" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Back" type="Button" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -75.0
+offset_right = 119.0
+grow_vertical = 0
+theme = ExtResource("2_g3vuc")
+text = "Back"
+
+[node name="FullLabel" type="Label" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.133681
+anchor_top = 0.285494
+anchor_right = 0.355903
+anchor_bottom = 0.390432
+theme_override_font_sizes/font_size = 32
+text = "Window Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Fullscreen" type="OptionButton" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105903
+anchor_top = 0.436728
+anchor_right = 0.383681
+anchor_bottom = 0.490741
+item_count = 3
+selected = 0
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Exclusive Fullscreen (Windows only)"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DiffLabel" type="Label" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.617188
+anchor_top = 0.390432
+anchor_right = 0.83941
+anchor_bottom = 0.49537
+theme_override_font_sizes/font_size = 32
+text = "Jetpack Fuel"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Difficulty" type="OptionButton" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.58941
+anchor_top = 0.541667
+anchor_right = 0.867188
+anchor_bottom = 0.595679
+item_count = 3
+selected = 1
+popup/item_0/text = "Infinite"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VolLabel" type="Label" parent="MainMenuLayer/Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.636285
+anchor_top = 0.115741
+anchor_right = 0.802083
+anchor_bottom = 0.220679
+theme_override_font_sizes/font_size = 32
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MainMenuLayer/Options"]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 129.0
+offset_right = 1071.0
+offset_bottom = 175.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="CRT" type="ColorRect" parent="MainMenuLayer/Options"]
+material = SubResource("ShaderMaterial_es8qm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Lightning" type="Timer" parent="."]
+
+[node name="Star" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, -75)
+light_color = Color(0.00392157, 0, 0.054902, 1)
+light_energy = 256.0
+shadow_enabled = true
+shadow_bias = 5.0
+omni_range = 4096.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dxkun")
+
+[node name="VoxelLodTerrain" type="VoxelLodTerrain" parent="."]
+unique_name_in_owner = true
+generator = SubResource("VoxelGeneratorNoise_5y6uy")
+mesher = SubResource("VoxelMesherTransvoxel_r8p45")
+collision_layer = 15
+collision_mask = 15
+
+[node name="Buzz" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oa4cc")
+autoplay = true
+
+[node name="TerrainCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+enabled = false
+target_position = Vector3(0, -500, 0)
+
+[node name="Artifact" type="RigidBody3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Artifact"]
+shape = SubResource("SphereShape3D_x5hvp")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Artifact"]
+radial_segments = 18
+rings = 18
+material = SubResource("StandardMaterial3D_e62i1")
+
+[node name="DeliveryPoint" type="Area3D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeliveryPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 249.5, 0)
+shape = SubResource("CylinderShape3D_suort")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="DeliveryPoint"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 500, 0)
+light_energy = 256.0
+shadow_enabled = true
+shadow_bias = 1.0
+spot_range = 1000.0
+spot_angle = 5.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="DeliveryPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 249.5, 0)
+cast_shadow = 0
+radius = 2.0
+height = 500.0
+sides = 32
+material = SubResource("StandardMaterial3D_5ne8d")
+
+[node name="DeliveryScan" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+enabled = false
+target_position = Vector3(0, -500, 0)
+collision_mask = 4
+
+[node name="UseCast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+collision_mask = 8
+
+[connection signal="animation_finished" from="MainMenuAnim" to="." method="_on_main_menu_anim_animation_finished"]
+[connection signal="pressed" from="MainMenuLayer/MainMenu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MainMenuLayer/MainMenu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainMenuLayer/MainMenu/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MainMenuLayer/Options/Back" to="." method="_on_back_pressed"]
+[connection signal="item_selected" from="MainMenuLayer/Options/Fullscreen" to="." method="_on_fullscreen_item_selected"]
+[connection signal="item_selected" from="MainMenuLayer/Options/Difficulty" to="." method="_on_difficulty_item_selected"]
+[connection signal="value_changed" from="MainMenuLayer/Options/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="timeout" from="Lightning" to="." method="_on_lightning_timeout"]

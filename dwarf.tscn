@@ -1,0 +1,269 @@
+[gd_scene load_steps=9 format=3 uid="uid://kw7v8s8q0j1o"]
+
+[ext_resource type="Script" path="res://Dwarf.gd" id="1_s0ta2"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="2_8iijf"]
+[ext_resource type="Texture2D" uid="uid://dvvhill1irtdp" path="res://whitecircle.png" id="2_cec5g"]
+[ext_resource type="Texture2D" uid="uid://ckkw2hgk40qd4" path="res://t_flashlightpattern.png" id="3_j5gu4"]
+[ext_resource type="Texture2D" uid="uid://d00of2u8etk0h" path="res://dirarrow.png" id="3_k0l4u"]
+[ext_resource type="Theme" uid="uid://deswxb7prgkhw" path="res://mainmenu_btn_theme.tres" id="4_38nj7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33yt2"]
+shader = ExtResource("2_8iijf")
+shader_parameter/res = Vector2(1152, 648)
+shader_parameter/mask_type = 0
+shader_parameter/bloom_type = 0
+shader_parameter/hardScan = -8.0
+shader_parameter/hardPix = -2.0
+shader_parameter/hardBloomScan = -2.0
+shader_parameter/hardBloomPix = -1.5
+shader_parameter/bloomAmount = 16.0
+shader_parameter/warp = Vector2(64, 24)
+shader_parameter/maskDark = 0.5
+shader_parameter/maskLight = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0m2ae"]
+radius = 0.25
+height = 1.75
+
+[node name="Dwarf" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+wall_min_slide_angle = 0.785398
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_s0ta2")
+
+[node name="Camera" type="Camera3D" parent="."]
+current = true
+fov = 90.0
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Camera"]
+
+[node name="GUILayer" type="CanvasLayer" parent="Camera"]
+
+[node name="GUI" type="Control" parent="Camera/GUILayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Info1" type="Label" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 11.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+
+[node name="Info2" type="Label" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 35.0
+offset_right = 11.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+
+[node name="Info3" type="Label" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 11.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+
+[node name="JetpackFG" type="ColorRect" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.84
+anchor_right = 0.7
+anchor_bottom = 0.85
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="FlareReady" type="TextureRect" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29
+anchor_top = 0.84
+anchor_right = 0.295
+anchor_bottom = 0.85
+grow_vertical = 2
+texture = ExtResource("2_cec5g")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Arrow" type="TextureRect" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487847
+anchor_top = 0.0493827
+anchor_right = 0.512153
+anchor_bottom = 0.0925926
+grow_horizontal = 2
+texture = ExtResource("3_k0l4u")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Distance" type="Label" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.413628
+anchor_top = 0.0864198
+anchor_right = 0.586372
+anchor_bottom = 0.148148
+grow_horizontal = 2
+text = "1234m"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Pause" type="ColorRect" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.357639
+anchor_top = 0.185957
+anchor_right = 0.642361
+anchor_bottom = 0.814043
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.627451, 0.627451, 0.627451, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Resume" type="Button" parent="Camera/GUILayer/GUI/Pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.45
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_38nj7")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+metadata/_edit_use_anchors_ = true
+
+[node name="QTMenu" type="Button" parent="Camera/GUILayer/GUI/Pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.55
+anchor_right = 0.8
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_38nj7")
+theme_override_font_sizes/font_size = 24
+text = "Quit to Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="Fail" type="ColorRect" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Camera/GUILayer/GUI/Fail"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Win" type="ColorRect" parent="Camera/GUILayer/GUI"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Camera/GUILayer/GUI/Win"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CRT" type="ColorRect" parent="Camera/GUILayer"]
+material = SubResource("ShaderMaterial_33yt2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LampJump" type="Node3D" parent="Camera"]
+unique_name_in_owner = true
+
+[node name="Headlight" type="SpotLight3D" parent="Camera/LampJump"]
+unique_name_in_owner = true
+light_energy = 0.0
+light_projector = ExtResource("3_j5gu4")
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+spot_range = 100.0
+spot_angle = 35.0
+
+[node name="HeadlightFlicker" type="Timer" parent="Camera/LampJump/Headlight"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="DwarfCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CapsuleShape3D_0m2ae")
+
+[node name="FlareTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="LandSound" type="AudioStreamPlayer" parent="."]
+
+[node name="VictoryTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="pressed" from="Camera/GUILayer/GUI/Pause/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Camera/GUILayer/GUI/Pause/QTMenu" to="." method="_on_qt_menu_pressed"]
+[connection signal="timeout" from="Camera/LampJump/Headlight/HeadlightFlicker" to="." method="_on_headlight_flicker_timeout"]
+[connection signal="timeout" from="FlareTimer" to="." method="_on_flare_timer_timeout"]
+[connection signal="timeout" from="VictoryTimer" to="." method="_on_victory_timer_timeout"]
